@@ -1,15 +1,14 @@
 package roulette;
 
-
 /**
  * Represents player's attempt to bet on outcome of the roulette wheel's spin.
  * 
  * @author Robert C. Duvall
  */
-public class Bet {
+public abstract class Bet {
     private String myDescription;
     private int myOdds;
-
+    
     /**
      * Constructs a bet with the given name and odds.
      * 
@@ -34,4 +33,14 @@ public class Bet {
     public String getDescription () {
         return myDescription;
     }
+    
+    public abstract boolean betIsMade (Wheel wheel, String betChoice);
+    
+    /**
+     * Place the given bet by prompting user for specific information need to complete that bet.
+     *
+     * @param whichBet specific bet chosen by the user
+     */
+    public abstract String placeBet(); 
+    
 }
