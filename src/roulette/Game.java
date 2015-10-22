@@ -1,5 +1,6 @@
 package roulette;
 
+import roulette.bets.BetFactory;
 import roulette.bets.OddEven;
 import roulette.bets.RedBlack;
 import roulette.bets.ThreeConsecutive;
@@ -69,10 +70,13 @@ public class Game {
      */
     private Bet promptForBet () {
         System.out.println("You can make one of the following types of bets:");
-        for (int k = 0; k < myPossibleBets.length; k++) {
-            System.out.println(String.format("%d) %s", (k + 1), myPossibleBets[k]));
+        int betNumberLength = BetFactory.getNumberOfBets();
+        for (int k = 0; k < betNumberLength; k++) {
+//            System.out.println(String.format("%d) %s", (k + 1), myPossibleBets[k]));
+        	 System.out.println(String.format("%d) %s", (k + 1), BetFactory.getBet(k)));
         }
-        int response = ConsoleReader.promptRange("Please make a choice", 1, myPossibleBets.length);
-        return myPossibleBets[response - 1];
+        int response = ConsoleReader.promptRange("Please make a choice", 1, betNumberLength);
+//        return myPossibleBets[response - 1];
+        return BetFactory.getBet(response - 1);
     }
 }
