@@ -71,10 +71,7 @@ public class Game {
     private Bet promptForBet () {
         System.out.println("You can make one of the following types of bets:");
         int betNumberLength = BetFactory.getNumberOfBets();
-        for (int k = 0; k < betNumberLength; k++) {
-//            System.out.println(String.format("%d) %s", (k + 1), myPossibleBets[k]));
-        	 System.out.println(String.format("%d) %s", (k + 1), BetFactory.getBet(k)));
-        }
+        BetFactory.printBets();
         int response = ConsoleReader.promptRange("Please make a choice", 1, betNumberLength);
 //        return myPossibleBets[response - 1];
         return BetFactory.getBet(response - 1);

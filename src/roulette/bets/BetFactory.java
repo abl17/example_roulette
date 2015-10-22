@@ -1,5 +1,6 @@
 package roulette.bets;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 import roulette.Bet;
@@ -22,6 +23,11 @@ Create a properties file that maps the complete Bet subclass name to its odds an
 
 public class BetFactory {
 
+	private static final String[] NAMES = {"RedBlack", "OddEven", "ThreeConsecutive"};
+	private static final String[] DESCRIPTIONS = {"Red or Black", "Odd or Even", "Three in a Row"};
+	private static final int[] ODDS = {1, 1, 11};
+ 	
+	
 	private static final Bet[] MY_POSSIBLE_BETS = {
 			new RedBlack("Red or Black", 1),
 			new OddEven("Odd or Even", 1),
@@ -30,6 +36,17 @@ public class BetFactory {
 
 	public static int getNumberOfBets () {
 		return MY_POSSIBLE_BETS.length;
+	}
+	
+	public static Bet getBet (String name) {
+		try {
+			Class<?> betClass = Class.forName(name);
+			Constructor<?> betConstructor = betClass.getConstructor(String.class, Integer.class);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+//		Bet mybet = betConstructor.newInstance();
 	}
 	
 	public static Bet getBet (int betIndex) {
@@ -44,5 +61,11 @@ public class BetFactory {
 //		default: 
 //			return null;
 //		}
+	}
+	
+	public static void printBets () {
+        for (int k = 0; k < MY_POSSIBLE_BETS.length; k++) {
+      	 System.out.println(String.format("%d) %s", (k + 1), BetFactory.getBet(k)));
+      }
 	}
 }
